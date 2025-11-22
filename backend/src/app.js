@@ -9,6 +9,7 @@ const app = express();
 // Middleware
 const allowedOrigins = [
   "https://tiny-link-xwgs.vercel.app",
+  "https://tiny-link-rosy.vercel.app",
   "http://localhost:5173",
 ];
 
