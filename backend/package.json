@@ -7,14 +7,13 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
+    "build": "echo 'No build step needed'",
+    "postinstall": "prisma generate",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
     "prisma:push": "prisma db push"
   },
-  "keywords": ["url-shortener", "express", "prisma"],
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "@prisma/client": "^5.9.1",
     "cors": "^2.8.5",
