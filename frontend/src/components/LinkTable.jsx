@@ -103,6 +103,7 @@ export default function LinkTable({ links, loading, onDelete }) {
                 <td>
                   <div className="flex items-center gap-2">
                     <code className="bg-gray-100 px-2 py-1 rounded font-mono text-primary-600">
+                      <a href={link.shortUrl} target="_blank" rel="noopener noreferrer">{link.code}</a>
                       {link.code}
                     </code>
                     <CopyButton text={link.shortUrl} className="text-xs px-2 py-1" />

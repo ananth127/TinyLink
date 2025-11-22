@@ -31,6 +31,13 @@ export async function getAllLinks(search = '') {
   return response.data;
 }
 
+export async function getAllLinksStatus(search = '') {
+  const response = await api.get('/links/status', {
+    params: search ? { search } : {},
+  });
+  return response.data;
+}
+
 /**
  * Get stats for a specific link
  * @param {string} code - The short code

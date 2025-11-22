@@ -23,9 +23,25 @@ export default function Dashboard() {
     }
   };
 
+  // Fetch links on mount
   useEffect(() => {
     fetchLinks();
   }, []);
+
+  // Auto refresh click stats every second
+  useEffect(() => {
+    const clickStats = async () => {
+      try {
+        const data = await getAllLinks(searchQuery);
+        setLinks(data);
+      } catch (err) {
+        console.error('Fetch error:', err);
+      }
+    };
+
+    const intervalId = setInterval(clickStats, 1000);
+    return () => clearInterval(intervalId);
+  }, [searchQuery]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -35,8 +51,7 @@ export default function Dashboard() {
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchQuery(value);
-    
-    // Auto-search after 500ms of no typing
+
     if (value === '') {
       fetchLinks('');
     }
@@ -72,9 +87,7 @@ export default function Dashboard() {
               </svg>
               <h1 className="text-2xl font-bold text-gray-900">TinyLink</h1>
             </div>
-            <div className="text-sm text-gray-600">
-              URL Shortener Dashboard
-            </div>
+            <div className="text-sm text-gray-600">URL Shortener Dashboard</div>
           </div>
         </div>
       </header>
@@ -106,10 +119,7 @@ export default function Dashboard() {
                   placeholder="Search by code or URL..."
                   className="input flex-1"
                 />
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                >
+                <button type="submit" className="btn btn-primary">
                   <svg
                     className="w-5 h-5"
                     fill="none"
@@ -146,11 +156,7 @@ export default function Dashboard() {
             )}
 
             {/* Links Table */}
-            <LinkTable
-              links={links}
-              loading={loading}
-              onDelete={handleLinkDeleted}
-            />
+            <LinkTable links={links} loading={loading} onDelete={handleLinkDeleted} />
           </div>
         </div>
       </main>
